@@ -1,0 +1,262 @@
+<resources>
+    <string name="app_name">APAS app</string>
+
+    <string-array name="stati_array">
+        <item>Italia</item>
+        <item>San Marino</item>
+    </string-array>
+
+    <string-array name="castelli_array">
+        <item>Città</item>
+        <item>Acquaviva</item>
+        <item>Borgo Maggiore</item>
+        <item>Chiesanuova</item>
+        <item>Domagnano</item>
+        <item>Faetano</item>
+        <item>Fiorentino</item>
+        <item>Montegiardino</item>
+        <item>Serravalle</item>
+    </string-array>
+
+    <string-array name="regioni_array">
+        <item>Abruzzo</item>
+        <item>Basilicata</item>
+        <item>Calabria</item>
+        <item>Campania</item>
+        <item>Emilia Romagna</item>
+        <item>Friuli Venezia Giulia</item>
+        <item>Lazio</item>
+        <item>Liguria</item>
+        <item>Lombardia</item>
+        <item>Marche</item>
+        <item>Molise</item>
+        <item>Piemonte</item>
+        <item>Puglia</item>
+        <item>Sardegna</item>
+        <item>Sicilia</item>
+        <item>Toscana</item>
+        <item>Trentino Alto Adige</item>
+        <item>Umbria</item>
+        <item>Valle d\'Aosta</item>
+        <item>Veneto</item>
+    </string-array>
+
+
+    <string-array name="privince_abruzzo_array">
+        <item>Chieti</item>
+        <item>L\Aquila</item>
+        <item>Pescara</item>
+        <item>Teramo</item>
+    </string-array>
+
+    <string-array name="province_basilicata_array">
+        <item>Matera</item>
+        <item>Potenza</item>
+    </string-array>
+
+    <string-array name="province_calabria_array">
+        <item>Catanzaro</item>
+        <item>Cosenza</item>
+        <item>Crotone</item>
+        <item>Reggio Calabria</item>
+        <item>Vibo Valentia</item>
+    </string-array>
+    
+    <string-array name="province_campania_array">
+        <item>Avellino</item>
+        <item>Benvenuto</item>
+        <item>Caserta</item>
+        <item>Napoli</item>
+        <item>Salerno</item>
+    </string-array>
+
+    <string-array name="province_emiliaromagna_array">
+        <item>Bologna</item>
+        <item>Ferrara</item>
+        <item>Forlì-Cesena</item>
+        <item>Modena</item>
+        <item>Parma</item>
+        <item>Piacenza</item>
+        <item>Ravenna</item>
+        <item>Reggio Emilia</item>
+        <item>Rimini</item>
+    </string-array>
+
+    <string-array name="province_friuliveneziagiulia">
+        <item>Gorizia</item>
+        <item>Pordenone</item>
+        <item>Trieste</item>
+        <item>Udine</item>
+    </string-array>
+
+    <string-array name="province_lazio">
+        <item>Frosinone</item>
+        <item>Latina</item>
+        <item>Rieti</item>
+        <item>Roma</item>
+        <item>Viterbo</item>
+    </string-array>
+
+    <string-array name="province_liguria">
+        <item>Genova</item>
+        <item>Imperia</item>
+        <item>La Spezia</item>
+        <item>Savona</item>
+    </string-array>
+
+    <string-array name="province_lombardia">
+        <item>Bergamo</item>
+        <item>Brescia</item>
+        <item>Como</item>
+        <item>Cremona</item>
+        <item>Lecco</item>
+        <item>Lodi</item>
+        <item>Mantova</item>
+        <item>Milano</item>
+        <item>Monza e della Brianza</item>
+        <item>Pavia</item>
+        <item>Sondrio</item>
+        <item>Varese</item>
+    </string-array>
+
+    <string-array name="province_marche">
+        <item>Ancona</item>
+        <item>Ascoli Piceno</item>
+        <item>Fermo</item>
+        <item>Macerata</item>
+        <item>Pesaro e Urbino</item>
+    </string-array>
+
+    <string-array name="province_molise">
+        <item>Campobasso</item>
+        <item>Isernia</item>
+    </string-array>
+
+    <string-array name="province_piemonte">
+        <item>Alessandria</item>
+        <item>Asti</item>
+        <item>Biella</item>
+        <item>Cuneo</item>
+        <item>Novara</item>
+        <item>Torino</item>
+        <item>Verbano-Cusio-Ossola</item>
+        <item>Vercelli</item>
+    </string-array>
+
+    <string-array name="province_puglia">
+        <item>Bari</item>
+        <item>Barletta-Andria-Trani</item>
+        <item>Brindisi</item>
+        <item>Foggia</item>
+        <item>Lecce</item>
+        <item>Taranto</item>
+    </string-array>
+
+    <string-array name="province_sardegna">
+        <item>Cagliari</item>
+        <item>Carbonia-Iglesias</item>
+        <item>Nuoro</item>
+        <item>Olbia-Tempio</item>
+        <item>Oristano</item>
+        <item>Medio Campidano</item>
+        <item>Sassari</item>
+        <item>Ogliastra</item>
+    </string-array>
+
+    <string-array name="province_sicilia">
+        <item>Agrigento</item>
+        <item>Caltanissetta</item>
+        <item>Catania</item>
+        <item>Enna</item>
+        <item>Messina</item>
+        <item>Palermo</item>
+        <item>Ragusa</item>
+        <item>Siracusa</item>
+        <item>Trapani</item>
+    </string-array>
+
+    <string-array name="province_toscana">
+        <item>Arezzo</item>
+        <item>Firenze</item>
+        <item>Grosseto</item>
+        <item>Livorno</item>
+        <item>Lucca</item>
+        <item>Massa-Carrara</item>
+        <item>Pisa</item>
+        <item>Pistoia</item>
+        <item>Prato</item>
+        <item>Siena</item>
+    </string-array>
+
+    <string-array name="province_trentinoaltoadige">
+        <item>Bolzano</item>
+        <item>Trento</item>
+    </string-array>
+
+    <string-array name="province_umbria">
+        <item>Perugia</item>
+        <item>Terni</item>
+    </string-array>
+
+    <string-array name="province_valledaosta">
+        <item>Aosta</item>
+    </string-array>
+
+    <string-array name="province_veneto">
+        <item>Belluno</item>
+        <item>Padova</item>
+        <item>Rovigo</item>
+        <item>Treviso</item>
+        <item>Venezia</item>
+        <item>Verona</item>
+        <item>Vicenza</item>
+    </string-array>
+
+
+    <string-array name="tipo">
+        <item>Cane</item>
+        <item>Gatto</item>
+    </string-array>
+
+
+    <string-array name="razze_cani">
+        <item></item>
+        <item>Afgano</item>
+        <item>Barboncino</item>
+        <item>Bassotto</item>
+        <item>Beagle</item>
+        <item>Bobtail</item>
+        <item>Border Collie</item>
+        <item>Boxer</item>
+        <item>Bulldog</item>
+        <item>Carlino</item>
+        <item>Cocker Spaniel</item>
+        <item>Collie</item>
+        <item>Foxterrier</item>
+        <item>Golden Retriever</item>
+        <item>Jack Russel Terrier</item>
+        <item>Labrador Retriever</item>
+        <item>Meticcio</item>
+        <item>Pastore tedesco</item>
+    </string-array>
+
+    <string-array name="razze_gatti">
+        <item></item>
+        <item>American Shorthair</item>
+        <item>American Wirehair</item>
+        <item>Bengala</item>
+        <item>Blu di Russia</item>
+        <item>Bombay</item>
+        <item>Bombay</item>
+        <item>British</item>
+        <item>Certosino</item>
+        <item>Europeo</item>
+        <item>Korat</item>
+        <item>Scottish Fold</item>
+        <item>Siamese</item>
+        <item>Thai</item>
+        <item>Tonkinese</item>
+    </string-array>
+
+
+</resources>
