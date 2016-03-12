@@ -26,6 +26,9 @@ import java.util.Map;
 import tesi.unibo.it.apasapp.Location.LocationTracker;
 import tesi.unibo.it.apasapp.Location.ProviderLocationTracker;
 
+
+/*questatatatat*/
+
 public class MainActivity extends AppCompatActivity implements LocationTracker.LocationUpdateListener{
 
     Button btnRegistrazione, btnLogInComeOspite, btnLogIn;
