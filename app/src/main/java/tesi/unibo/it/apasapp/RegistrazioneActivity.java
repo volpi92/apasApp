@@ -1,5 +1,6 @@
 package tesi.unibo.it.apasapp;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -23,8 +25,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,19 +40,19 @@ import tesi.unibo.it.apasapp.model.Persona;
  */
 public class RegistrazioneActivity extends AppCompatActivity {
 
-
+    Persona p;
     String nome, cognome, sesso, indirizzo, telefono, email, userName, password, ripetiPassword, dataNascita;
     String stato,regione,castello,provincia;
     String[] elencoStati, elencoRegioni, elencoCastelli;
     HashMap<String, String[]> mapRegioneToProvincia;
 
+    EditText editTextNome, editTextCognome, editTextDataNascita, editTextIndirizzo, editTextTelefono, editTextEmail, editTextUserName, editTextPassword, editTextRipetiPassword;
+    RadioButton rdbSessoMaschio;
 
     Button btnRegistrami;
     Spinner spinnerStato, spinnerRegioneOCastello, spinnerProvince;
     // Create an ArrayAdapter using the string array and a default spinner layout
     ArrayAdapter<String> adapterStato, adapterRegioneOCastello, adapterProvince;
-
-    Persona p;
 
 
     TextView txtViewCastelloORegione;
@@ -59,16 +63,27 @@ public class RegistrazioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registrazione_layout);
 
+        editTextNome = (EditText)findViewById(R.id.editTextNome);
+        editTextCognome = (EditText)findViewById(R.id.editTextCognome);
+        rdbSessoMaschio = (RadioButton)findViewById(R.id.rdbMaschio);
+        editTextDataNascita = (EditText)findViewById(R.id.editTextDataNascita);
+        editTextIndirizzo = (EditText)findViewById(R.id.editTextIndirizzo);
+        editTextTelefono = (EditText)findViewById(R.id.editTextTelefono);
+        editTextEmail = (EditText)findViewById(R.id.editTextEmail);
+        editTextUserName = (EditText)findViewById(R.id.editTextUserName);
+        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
+        editTextRipetiPassword = (EditText)findViewById(R.id.editTextRipetiPassword);
+
         elencoStati = Utility.getStati(getResources());
         elencoRegioni = Utility.getRegioni(getResources());
         elencoCastelli = Utility.getCastelli(getResources());
         mapRegioneToProvincia = Utility.getRegioniProvince(getResources());
 
-        txtViewCastelloORegione = (TextView)findViewById(R.id.txtViewRegioniOCastelloRegistrazione);
+        txtViewCastelloORegione = (TextView)findViewById(R.id.txtViewRegioneOCastello);
 
-        spinnerStato = (Spinner) findViewById(R.id.spinnerStatoRegistrazione);
-        spinnerRegioneOCastello = (Spinner)findViewById(R.id.spinnerRegioneOCastelloRegistrazione);
-        spinnerProvince = (Spinner)findViewById(R.id.spinnerProvinciaRegistrazione);
+        spinnerStato = (Spinner) findViewById(R.id.spinnerStato);
+        spinnerRegioneOCastello = (Spinner)findViewById(R.id.spinnerRegioneOCastello);
+        spinnerProvince = (Spinner)findViewById(R.id.spinnerProvincia);
 
 
         adapterStato =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, elencoStati);
@@ -96,8 +111,10 @@ public class RegistrazioneActivity extends AppCompatActivity {
 
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         spinnerRegioneOCastello.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -114,8 +131,10 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     regione = null;
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         spinnerProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -130,37 +149,45 @@ public class RegistrazioneActivity extends AppCompatActivity {
             }
         });
 
+        editTextDataNascita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentDate=Calendar.getInstance();
+                final int mYear=mcurrentDate.get(Calendar.YEAR);
+                final int mMonth=mcurrentDate.get(Calendar.MONTH);
+                final int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker=new DatePickerDialog(RegistrazioneActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        selectedmonth+=1;
+                        editTextDataNascita.setText(selectedyear+"-"+selectedmonth+"-"+selectedday);
+                    }
+                },mYear, mMonth, mDay);
+                mDatePicker.setTitle("Select date");
+                mDatePicker.show();
+            }
+        });
+
+
+
         btnRegistrami = (Button)findViewById(R.id.btnRegistrami);
         btnRegistrami.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check campi inseriti
-                //if campi ok invia richiesta al server per controllo username disponibile
-                //return json con risposta dal server, OK oppure devi inserire un diverso userName
-
-                //TUTTO OK, il server ha inserito i dati nel database, e finish();
-                //altrimenti resta in questa schermata Toast devi inserire un diverso userName
-
-
-                if(stato.equals("San Marino")) {
-                    Toast.makeText(getApplicationContext(), "San Marino, Castello: " + castello,Toast.LENGTH_SHORT).show();
-                } else if(stato.equals("Italia")) {
-                    Toast.makeText(getApplicationContext(), "Italia, Regione; " + regione + ", Provincia: " + provincia,Toast.LENGTH_SHORT).show();
-                }
-
-
-                boolean flag = checkCampiInseriti();
-                if(flag == true) {
-                    effettuaRegistrazione();
-
-
-
-                    //invia al server (usa asyncTask, attendi risposta, se positiva Toast registrazione ok e torni al login
-                    //altrimenti toast cambia username
-                    //Toast
-                    //finish();
+                if(Utility.isInternetAvailable(RegistrazioneActivity.this) == true) {
+                    boolean flag = checkCampiInseriti();
+                    if (flag == true) {
+                        if(stato.equals("Italia")) {
+                            p = new Persona(0, nome, cognome, sesso, email, telefono,stato, regione, provincia, null, indirizzo, userName, password, "utente generico", dataNascita);
+                        } else {
+                            p = new Persona(0, nome, cognome, sesso, email, telefono,stato, null, null, castello, indirizzo, userName, password, "utente generico", dataNascita);
+                        }
+                        effettuaRegistrazione();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Compilare tutti i campi", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    //Toast errore compilare tutti i campi
+                    Toast.makeText(getApplicationContext(), "Attivare internet", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -170,98 +197,76 @@ public class RegistrazioneActivity extends AppCompatActivity {
         final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
-        String URL = "http://tesimobilewebdesign.altervista.org/INSERTandroid/inserisciPersona.php";
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, URL,
-                new Response.Listener<JSONObject>() {
+        String URL = " http://192.168.1.7/progettoTesi/MODIFYandroid/updatePersona.php";
+        //String URL = "http://192.168.1.7/progettoTesi/INSERTandroid/inserisciPersona.php";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        //controllare la risposta;
-                        Toast.makeText(RegistrazioneActivity.this, "il server mi ha risposto", Toast.LENGTH_LONG).show();
-
-
-
-                        pDialog.dismiss();
+                    public void onResponse(String response) {
+                        try {
+                            pDialog.dismiss();
+                            //controllare la risposta;
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("result");
+                            if(success == true) {
+                                Toast.makeText(getApplicationContext(), jsonResponse.getString("data"), Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), jsonResponse.getString("data"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegistrazioneActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                         pDialog.dismiss();
+                        Toast.makeText(RegistrazioneActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("nome", nome);
-                /*params.put("cognome", cognome);
-                params.put("sesso", sesso);
-                params.put("dataNascita", dataNascita);
-                params.put("email", email);
-                params.put("telefono", telefono);
-                params.put("stato", stato);
-                params.put("regione", regione);
-                params.put("provincia", provincia);
-                params.put("castello", castello);
-                params.put("indirizzo", indirizzo);
-                params.put("userName", userName);
-                params.put("password", password);*/
+                params.put("nome", p.getNome());
+                params.put("cognome", p.getCognome());
+                params.put("sesso", p.getSesso());
+                params.put("dataNascita", p.getDataNascita().toString());
+                params.put("email", p.getEmail());
+                params.put("telefono", p.getTelefono());
+                params.put("stato", p.getStato());
+                if(stato.equals("Italia")) {
+                    params.put("regione", p.getRegione());
+                    params.put("provincia", p.getProvincia());
+                } else {
+                    params.put("castello", p.getCastello());
+                }
+                params.put("indirizzo", p.getIndirizzo());
+                params.put("userName", p.getUserName());
+                params.put("password", p.getPassword());
                 return params;
             }
         };
-
-
-      /*  StringRequest jsonRequest = new StringRequest(Request.Method.POST, URL,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Toast.makeText(RegistrazioneActivity.this, "il server mi ha risposto", Toast.LENGTH_LONG).show();
-                    pDialog.dismiss();
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(RegistrazioneActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                    pDialog.dismiss();
-                }
-            }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("nome", "nome"); //Add the data you'd like to send to the server.
-                return MyData;
-            }
-        };*/
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonRequest);
-
-
-
-
+        Volley.newRequestQueue(getApplication()).add(postRequest);
     }
 
 
     boolean checkCampiInseriti() {
         boolean flag = true;
         String errore = null;
-        nome = ((EditText)findViewById(R.id.editTextNomeRegistrazione)).getText().toString();
-        cognome = ((EditText)findViewById(R.id.editTextCognomeRegistrazione)).getText().toString();
-        sesso = ((RadioButton)findViewById(R.id.rdbMaschio)).isChecked()?"maschio":"femmina";
-        dataNascita = ((EditText)findViewById(R.id.editTextDataNascita)).getText().toString();
-        indirizzo =((EditText)findViewById(R.id.editTextIndirizzoRegistrazione)).getText().toString();
-        telefono = ((EditText)findViewById(R.id.editTextTelefonoRegistrazione)).getText().toString();
-        email = ((EditText)findViewById(R.id.editTextEmailRegistrazione)).getText().toString();
-        userName = ((EditText)findViewById(R.id.editTextUserNameRegistrazione)).getText().toString();
-        password = ((EditText)findViewById(R.id.editTextPasswordRegistrazione)).getText().toString();
-        ripetiPassword = ((EditText)findViewById(R.id.editTextRipetiPasswordRegistrazione)).getText().toString();
 
-
-
-
-
+        nome = editTextNome.getText().toString();
+        cognome = editTextCognome.getText().toString();
+        sesso = rdbSessoMaschio.isChecked()?"maschio":"femmina";
+        dataNascita = editTextDataNascita.getText().toString();
+        indirizzo = editTextIndirizzo.getText().toString();
+        telefono = editTextTelefono.getText().toString();
+        email = editTextEmail.getText().toString();
+        userName = editTextUserName.getText().toString();
+        password = editTextPassword.getText().toString();
+        ripetiPassword = editTextRipetiPassword.getText().toString();
         boolean emailOK = isEmailValid(email);
-
 
         if(nome.equals("") || cognome.equals("") || indirizzo.equals("") || telefono.equals("") || email.equals("") || userName.equals("") || password.equals("") || ripetiPassword.equals("")) {
             errore = "Compilare tutti i campi";
@@ -273,7 +278,6 @@ public class RegistrazioneActivity extends AppCompatActivity {
             errore = "Controlla uguaglianza campi password";
             flag = false;
         }
-
         if(flag == false) {
             Toast.makeText(getApplicationContext(), "Errore: " + errore, Toast.LENGTH_SHORT).show();
         }

@@ -6,6 +6,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.net.InetAddress;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -13,21 +16,12 @@ import java.util.HashMap;
  */
 public class Utility {
 
-
-
-    public static boolean isInternetAvailable() {
-            try {
-                InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
-                if (ipAddr.equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } catch (Exception e) {
-                return false;
-            }
+    public static boolean isInternetAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
 
     public static String[] getStati(Resources resource) {
         return resource.getStringArray(R.array.stati_array);
@@ -42,14 +36,6 @@ public class Utility {
 
     public static String[] getTipo(Resources resource) {
         return resource.getStringArray(R.array.tipo);
-    }
-
-    public static String[] getRazzeCani(Resources resource) {
-        return resource.getStringArray(R.array.razze_cani);
-    }
-
-    public static String[] getRazzeGatti(Resources resource) {
-        return resource.getStringArray(R.array.razze_gatti);
     }
     
     public static HashMap<String, String[]> getRegioniProvince(Resources resource) {
@@ -74,6 +60,17 @@ public class Utility {
         return mapRegioneToProvincia;
     }
     
-    
+    public static Date convertStringToDateFromWeb(String stringDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = formatter.parse(stringDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+
 
 }

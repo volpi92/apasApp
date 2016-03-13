@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editTextNomeRegistrazione"
+                    android:id="@+id/editTextNome"
                     android:text="nome" />
             </LinearLayout>
 
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editTextCognomeRegistrazione"
+                    android:id="@+id/editTextCognome"
                     android:text="cognome" />
 
             </LinearLayout>
@@ -111,11 +111,11 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="date"
                     android:ems="10"
+                    android:focusable="false"
                     android:id="@+id/editTextDataNascita"
                     android:layout_weight="1"
-                    android:text="5/11/1992" />
+                    android:text="1992-11-5" />
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +130,7 @@
                     android:id="@+id/textView7" />
 
                 <Spinner
-                    android:id="@+id/spinnerStatoRegistrazione"
+                    android:id="@+id/spinnerStato"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -145,10 +145,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Regione"
-                    android:id="@+id/txtViewRegioniOCastelloRegistrazione" />
+                    android:id="@+id/txtViewRegioneOCastello" />
 
                 <Spinner
-                    android:id="@+id/spinnerRegioneOCastelloRegistrazione"
+                    android:id="@+id/spinnerRegioneOCastello"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -166,7 +166,7 @@
                     android:id="@+id/textView11" />
 
                 <Spinner
-                    android:id="@+id/spinnerProvinciaRegistrazione"
+                    android:id="@+id/spinnerProvincia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -187,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPostalAddress"
                     android:ems="10"
-                    android:id="@+id/editTextIndirizzoRegistrazione"
+                    android:id="@+id/editTextIndirizzo"
                     android:text="strada" />
 
             </LinearLayout>
@@ -208,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:ems="10"
-                    android:id="@+id/editTextTelefonoRegistrazione"
+                    android:id="@+id/editTextTelefono"
                     android:text="321321" />
 
             </LinearLayout>
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/editTextEmailRegistrazione"
+                    android:id="@+id/editTextEmail"
                     android:text="ds@r.it" />
 
             </LinearLayout>
@@ -250,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editTextUserNameRegistrazione"
+                    android:id="@+id/editTextUserName"
                     android:text="asd" />
             </LinearLayout>
 
@@ -270,7 +270,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:id="@+id/editTextPasswordRegistrazione"
+                    android:id="@+id/editTextPassword"
                     android:text="ddd" />
 
             </LinearLayout>
@@ -291,7 +291,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:id="@+id/editTextRipetiPasswordRegistrazione"
+                    android:id="@+id/editTextRipetiPassword"
                     android:text="ddd" />
             </LinearLayout>
 

@@ -47,8 +47,6 @@ public class InserisciAnimaleSmarritoActivity extends AppCompatActivity {
         setContentView(R.layout.smarrimenti_aggiungi_nuovo_smarrimento);
 
         tipo = Utility.getTipo(getResources());
-        elencoRazzeCani = Utility.getRazzeCani(getResources());
-        elencoRazzeGatti = Utility.getRazzeGatti(getResources());
         elencoStati = Utility.getStati(getResources());
         elencoRegioni = Utility.getRegioni(getResources());
         elencoCastelli = Utility.getCastelli(getResources());

@@ -25,9 +25,8 @@ import java.util.Map;
 
 import tesi.unibo.it.apasapp.Location.LocationTracker;
 import tesi.unibo.it.apasapp.Location.ProviderLocationTracker;
+import tesi.unibo.it.apasapp.model.Persona;
 
-
-/*questatatatat*/
 
 public class MainActivity extends AppCompatActivity implements LocationTracker.LocationUpdateListener{
 
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements LocationTracker.L
     ProviderLocationTracker provider;
     ProgressDialog progressBar;
     long secondsInizio;
+    Persona p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,40 +79,33 @@ public class MainActivity extends AppCompatActivity implements LocationTracker.L
                 //crea progressbar
 
 
-                if(Utility.isInternetAvailable() == true) {
-
+                if(Utility.isInternetAvailable(MainActivity.this) == true) {
                     userName = editTextUserName.toString();
                     password = editTextPassword.toString();
-                    if (userName.equals("") || password.equals("")) {
-                        Toast.makeText(getApplicationContext(), "Inserire userName e password", Toast.LENGTH_SHORT).show();
-                    } else {
-
-
-
-
-                        //chiamata al server (input username e password POST)
-                        //decodifica rispostaJSON
-                        //controllo responsoJSON
-                        /*if() {
-                            //se il json ritornato ha esito OK, salva i dati in un oggetto apposito, nome, cognome, ecc...
-                            //salva i permessi (utente, volontario ecc...)
-                            //passa l'oggetto al selectionActivity
-                            //avvia intent.
-                        } else {
-                            Toast.makeText(getApplicationContext(), "user_name e password non trovati nel server, reinserire correttamente i valori", Toast.LENGTH_SHORT).show();
-
-                        }*/
+                    if(!userName.equals("") && !password.equals("")) {
+                        final ProgressDialog pDialog = new ProgressDialog(MainActivity.this);
+                        pDialog.setMessage("Loading...");
+                        pDialog.show();
                         String url = "http://192.168.1.7/progettoTesi/GETandroid/getLogIn.php";
-
                         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
                                         try {
-                                            JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
-                                            String site = jsonResponse.getString("site"),
-                                                    network = jsonResponse.getString("network");
-                                            System.out.println("Site: "+site+"\nNetwork: "+network);
+                                            pDialog.dismiss();
+                                            JSONObject jsonResponse = new JSONObject(response);
+                                            boolean success = jsonResponse.getBoolean("result");
+                                            if(success==true) {
+                                                Toast.makeText(getApplicationContext(), jsonResponse.getString("data"), Toast.LENGTH_SHORT).show();
+                                                //crea persona
+                                                p = Persona.createPersonaFromJson(jsonResponse.getJSONObject("data"));
+                                                Intent intent = new Intent(MainActivity.this, SelectCategoryActivity.class);
+                                                intent.putExtra("persona", p);
+                                                startActivity(intent);
+
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), jsonResponse.getString("data"), Toast.LENGTH_SHORT).show();
+                                            }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -121,35 +114,29 @@ public class MainActivity extends AppCompatActivity implements LocationTracker.L
                                 new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
+                                        pDialog.dismiss();
                                         error.printStackTrace();
                                     }
                                 }
-                        ) {
+                        ){
                             @Override
                             protected Map<String, String> getParams()
                             {
                                 Map<String, String> params = new HashMap<>();
                                 // the POST parameters:
-                                params.put("userName", "aaa");
-                                params.put("password", "sss");
+                                params.put("userName", editTextUserName.getText().toString());
+                                params.put("password", editTextPassword.getText().toString());
                                 return params;
                             }
                         };
-                        Volley.newRequestQueue(MainActivity.this).add(postRequest);
+                        Volley.newRequestQueue(getApplication()).add(postRequest);
 
-
-
-
-
-
-
-
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Inserire userName e password", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "E' necessario essere connessi per effettuare il log-in", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 

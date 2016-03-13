@@ -7,6 +7,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Benvenuto"
+        android:id="@+id/txtBenvenuto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Seleziona categoria"
         android:id="@+id/textView16" />
 
@@ -30,4 +37,12 @@
         android:text="Adozioni animali"
         android:id="@+id/btnAdozioneAnimaliCategory"
         android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modifica i miei dati"
+        android:id="@+id/btnModificaDatiPersona"
+        android:layout_gravity="center_horizontal"
+        android:visibility="invisible" />
 </LinearLayout>
